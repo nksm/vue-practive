@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="example">
+  </div>
+  <script>
+    // ライフサイクル
+    new Vue({
+      data: {
+        a: 1
+      },
+      created: function () {
+        // `this` は vm インスタンスを指します
+        console.log('a is: ' + this.a)
+      }
+    })
+    // NG な記述
+    // arrow function は this の参照先が変わるので利用しない
+    var v = new Vue({
+      data: {
+        a: 1
+      },
+      created: () => {
+        // `this` は vm インスタンスを指します
+        console.log('a is: ' + this.a)
+      }
+    })
+
+    v.$watch('a', newValue => this.myMethod());
+  </script>
+</body>
+</html>
