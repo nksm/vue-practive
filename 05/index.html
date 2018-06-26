@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!-- オブジェクト構文 -->
+  <!-- isActive が true だった場合、 -->
+  <div v-bind:class="{ active: isActive }"></div>
+  <!-- 共存も可能 -->
+  <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+  <script>
+    var vm = new Vue({
+      el: '.static',
+      data: {
+        isActive: true,
+        hasError: false
+      }
+    })
+  </script>
+
+  <!-- オブジェクトなのでこうも書ける -->
+  <div class="static2" v-bind:class="classObj"></div>
+  <script>
+    var vm2 = new Vue({
+      el: '.static2',
+      data: {
+        classObj: {
+          active: true,
+          'text-danger': false
+        }
+      }
+    })
+  </script>
+
+  <!-- computed を使う -->
+  <div class="static3" v-bind:class="classObj"></div>
+  <script>
+    var vm2 = new Vue({
+      el: '.static2',
+      data: {
+        isActive: true,
+        error: null
+      },
+      computed: {
+        classObj: function() {
+          return {
+            active: this.isActive && !this.error,
+            'text-danger': this.error && this.error.type === 'fatal',
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- v-bind:class には配列も渡すことができる -->
+  <div v-bind:style="[baseStyles, overridingStyles]"></div>
+</body>
+</html>

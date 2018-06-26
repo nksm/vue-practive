@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div v-if="ok">Yes</div>
+  <div v-else>No</div><!-- v-if の直後の要素でないとだめ -->
+
+  <!-- グループに対して表示非表示を切り替える場合は、template タグを利用する -->
+  <template v-if="ok">
+    <h1>title</h1>
+    <p>paragraph-1</p>
+    <p>paragraph-2</p>
+  </template>
+
+  <!-- else-if -->
+  <div v-if="type === 'a'">A</div>
+  <div v-else-if="type === 'b'">B</div>
+  <div v-else>No</div>
+
+  <!-- key による再利用可能な要素の制御 -->
+  <!-- input の値が共有される -->
+  <template v-if="loginType === 'username'">
+    <label>Username</label>
+    <input placeholder="Enter your username">
+  </template>
+  <template v-else>
+    <label>Email</label>
+    <input placeholder="Enter your email address">
+  </template>
+  <!-- input の値は共有。というか同じ要素は変更しない。 -->
+
+  <!-- 強制的に別の要素として認識するようにする -->
+  <template v-if="loginType === 'username'">
+    <label>Username</label>
+    <input placeholder="Enter your username" key="username-input">
+  </template>
+  <template v-else>
+    <label>Email</label>
+    <input placeholder="Enter your email address" key="email-input">
+  </template>
+</body>
+</html>

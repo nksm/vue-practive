@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!-- 算出プロパティ -->
+  <div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    <!-- <p>Computed reversed message: "{{ reversedMessage() }}"</p> -->
+    <p @on="now()">{{now}}</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example',
+      data: {
+        message: 'hello'
+      },
+      computed: {
+        reversedMessage: function() {
+          return this.message.split('').reverse().join('')
+        },
+        now: function() {
+          return Date.now();
+        }
+      },
+      methods: {
+        // reversedMessage: function() {
+        //   console.log('test')
+        //   return this.message.split('').reverse().join('');
+        // },
+        // now: function() {
+        //   console.log(Date.now());
+        //   return Date.now();
+        // }
+      }
+    });
+    console.log(vm.reversedMessage);
+
+    // 算出プロパティとメソッドの違い
+    // 算出プロパティはキャッシュされる
+    // 参照となる値に変更がなければ、返ってくる値には変更がない
+    // なので、頻繁に再描画する必要がない場合などは、computed を利用する
+    // computed と methods では同じ名前を定義してはだめ
+  </script>
+</body>
+</html>

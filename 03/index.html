@@ -16,8 +16,12 @@
   <span v-html="rawHTML"></span>
   <!-- 属性は v-bind を利用する -->
   <span v-bind:id="dynamicId"></span>
-  <!-- 属性は boolean の場合は、 -->
+  <!-- 属性は boolean の場合は -->
   <button v-bind:disabled="isButtonDisabled"></button>
+  <!-- テンプレートでは式を利用できる -->
+  <div>{{ numbner + 1 }}</div>
+  <div>{{ ok ? 'YES' : 'NO' }}</div>
+  <div v-bind:id="'list-' + id"></div>
   <script>
   </script>
 </body>
